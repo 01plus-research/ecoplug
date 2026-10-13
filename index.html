@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EcoPlug — Feasibility Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1d2329;--muted:#5b6670;--rule:#dde2e6;--bg:#fbfbf9;--panel:#f1f4f2;--accent:#1f6f4a;--warn:#9a5b00;--bad:#a12a2a;}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Source Serif 4",Georgia,serif}
+  main{max-width:46rem;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+  h1,h2,h3,.label,table,.verdict-tag,.meta,nav{font-family:Inter,system-ui,sans-serif}
+  h1{font-size:1.9rem;line-height:1.2;margin:0 0 .3rem}
+  h2{font-size:1.25rem;margin:2.8rem 0 .8rem;padding-top:.6rem;border-top:1px solid var(--rule)}
+  h3{font-size:1rem;margin:1.6rem 0 .4rem}
+  .meta{color:var(--muted);font-size:.85rem;margin-bottom:1.6rem}
+  a{color:var(--accent)}
+  p,li{margin:.5rem 0}
+  ul,ol{padding-left:1.3rem}
+  .verdict{background:var(--panel);border-left:5px solid var(--warn);padding:1.2rem 1.3rem;border-radius:4px}
+  .verdict-tag{display:inline-block;font-weight:600;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--warn);padding:.2rem .55rem;border-radius:3px}
+  .verdict h2{border:0;margin:.6rem 0 .4rem;padding:0;font-size:1.35rem}
+  .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.7rem;margin-top:1rem}
+  .num{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:.6rem .75rem}
+  .num .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .num .v{font-family:Inter,sans-serif;font-weight:600;font-size:1.05rem;line-height:1.3}
+  .note{background:#fff8ec;border:1px solid #f0dcb8;padding:.8rem 1rem;border-radius:4px;font-size:.95rem}
+  .hard{background:#fdeeee;border:1px solid #efc9c9;padding:.8rem 1rem;border-radius:4px}
+  .tbl{overflow-x:auto;margin:1rem 0}
+  table{border-collapse:collapse;width:100%;font-size:.84rem;line-height:1.45}
+  th,td{text-align:left;vertical-align:top;padding:.5rem .55rem;border-bottom:1px solid var(--rule)}
+  th{background:var(--panel);font-weight:600}
+  td.r,th.r{text-align:right;white-space:nowrap}
+  tr.total td{font-weight:600;border-top:2px solid var(--ink)}
+  ol.steps>li{margin:.8rem 0}
+  ol.steps .dur{font-family:Inter,sans-serif;font-size:.8rem;color:var(--muted)}
+  .tag{font-family:Inter,sans-serif;font-size:.7rem;font-weight:600;background:var(--bad);color:#fff;padding:.1rem .4rem;border-radius:3px;vertical-align:middle}
+  .lk{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600}
+  .lk-h{color:var(--bad)} .lk-m{color:var(--warn)} .lk-l{color:var(--accent)}
+  nav{font-size:.82rem;color:var(--muted);margin:1.4rem 0 0}
+  nav a{margin-right:.7rem;white-space:nowrap}
+  .src li{font-size:.88rem;word-break:break-word}
+  @media (max-width:420px){body{font-size:16px}h1{font-size:1.55rem}main{padding:1.6rem 1rem 3rem}}
+</style>
+</head>
+<body>
+<main>
+
+<h1>EcoPlug: can it be built?</h1>
+<div class="meta">Feasibility study · smart outlet that measures and switches each connected device, with a phone app · researched 13 October 2026</div>
+
+<section class="verdict" aria-label="Verdict">
+  <span class="verdict-tag">Feasible with changes</span>
+  <h2>Buy the switching and metering hardware certified. Build the system, the app and the evidence.</h2>
+  <p>A student should not design a circuit that switches and meters 120 V mains. The metering chips used in plugs of this kind are not isolated, so their logic ground is tied to mains neutral. Mistakes cause shocks and fires. They also mean the device could never be plugged in at a fair or at home without a safety certification. UL-listed plugs that meter every outlet and expose an open local API already cost about $20 each. Built on four of these, every MVP feature in the brief is reachable in about 16–20 weeks at 5 h/week: per-outlet power, live display, remote on/off, alerts and history. The hardware cannot be the student's contribution. The contribution is the hub software, the app, and a measured standby-power study of their own home.</p>
+  <div class="nums">
+    <div class="num"><div class="label">Parts cost</div><div class="v">$109.90<br><span style="font-weight:400;font-size:.8rem">4 plugs + reference meter</span></div></div>
+    <div class="num"><div class="label">Build time</div><div class="v">16–20 weeks<br><span style="font-weight:400;font-size:.8rem">~90 student hours</span></div></div>
+    <div class="num"><div class="label">Most likely to sink it</div><div class="v" style="font-size:.92rem">Trying to build mains hardware, or a hub that drops data so there is no history to show</div></div>
+  </div>
+</section>
+
+<p class="note"><strong>The brief does not say:</strong> the student's grade, coding level, weekly hours, deadline, or what the instructor knows. This study assumes a 10th–11th grader who can write basic Python, about 5 hours a week, an instructor with general programming experience but no power-electronics background, and a US home (120 V, Type A/B outlets). If the student has never programmed, add about 4 weeks to the plan. If a licensed electrical engineer will supervise in person, see <a href="#scope">scope</a> for the optional own-hardware track.</p>
+
+<nav>Jump to: <a href="#mvp">MVP</a><a href="#finish">Can they finish</a><a href="#buy">What to buy</a><a href="#steps">Steps</a><a href="#risks">Risks</a><a href="#fallback">Fallback</a><a href="#where">Where it could go</a><a href="#sources">Sources</a></nav>
+
+<h2 id="prior">What already exists</h2>
+<p>As a product, this idea is already on sale. Several retailers sell exactly what the brief describes:</p>
+<ul>
+  <li><strong>TP-Link Kasa HS300</strong>: a 6-outlet strip with per-outlet energy monitoring and remote control in the Kasa app. Listed at $59.54–$64.83.</li>
+  <li><strong>TP-Link Tapo P316M</strong>: a 6-outlet strip with Matter support and per-outlet energy statistics and charts. Seen at $39.99 on sale, $59.99 list.</li>
+  <li><strong>Emporia Smart Plug</strong>: a single plug that reports watts, volts and kWh with hour, day, week, month and year history, plus schedules and timers.</li>
+  <li><strong>Shelly Plug US Gen4</strong>: a single 15 A / 1800 W plug with power metering, Wi-Fi, Bluetooth, Zigbee and Matter. It has a documented local HTTP API, so no vendor cloud is needed.</li>
+  <li>Open source: Home Assistant's energy dashboard, plus ESPHome and Tasmota firmware for the Sonoff S31 plug (CSE7766 metering chip).</li>
+</ul>
+<p><strong>A judge will know these exist.</strong> "I built a smart plug with an app" is not novel. What the student can still own:</p>
+<ol>
+  <li><strong>Their own system end to end.</strong> A hub that polls each outlet, stores history, runs alert rules, and serves their own app. They write all of it rather than using the vendor's app.</li>
+  <li><strong>A measured result.</strong> Log 4–6 devices in their own home for 2+ weeks, find the standby ("vampire") loads, apply auto-off rules, and report the kWh and dollars saved against a baseline. Berkeley Lab's best estimate is that standby power is 5–10% of an average US home's electricity. A 2001 study of 10 California homes measured 6–26%, and Berkeley Lab says no agreed field measurements exist. A careful measurement in a real home is a legitimate small contribution.</li>
+  <li><strong>Smarter alerts</strong> than the commercial apps offer: for example, "TV has drawn more than 5 W for 3 h with no change", or "this load looks like it is on standby, not in use".</li>
+</ol>
+
+<h2 id="mvp">The MVP</h2>
+<p><strong>What gets built.</strong> Four UL-listed metering smart plugs (Shelly Plug US Gen4) go on four real devices at home, for example a TV, a game console, a desk lamp and a phone charger. A small Python service (the "hub") runs on a laptop or spare computer. It polls each plug's local API every 5–10 seconds, reading watts, volts, amps and cumulative Wh, and stores the readings in SQLite. It exposes a small REST API. A phone app built with React Native/Expo shows each outlet's live wattage, a kWh-per-day history chart for the last 7–30 days, and an on/off toggle per outlet. It also lists alerts the hub raised: high power above a set threshold, and standby power that stays above a set level for a set time.</p>
+<p><strong>What it does not do.</strong> No custom mains circuit board. No control from outside the home Wi-Fi in v1. No cloud accounts or user logins. No App Store release. No machine-learning device identification. No whole-home monitoring.</p>
+<p><strong>The two-minute demo.</strong> Plug a lamp and a laptop charger into two EcoPlugs on the table. The app shows about 0.x W idle, then the lamp's wattage when it is switched on. A Kill A Watt meter beside it shows the same number. Tap "off" and the lamp goes dark. Raise the lamp's power above a low threshold and an alert appears. Then open the history screen with two weeks of real home data: "my TV and console used X kWh a week in standby; with auto-off rules it dropped to Y."</p>
+<p id="scope"><strong>Out of scope for v1. Do not add these back quietly:</strong> a homemade 120 V switching or metering board; a custom multi-outlet enclosure; remote access over the internet; iOS App Store publishing; per-appliance AI disaggregation. A <em>low-voltage own-hardware track</em> is allowed only as a stretch: an ESP32 plus INA219 sensors measuring 5–12 V DC loads. It shows the student understands current sensing with nothing above 26 V.</p>
+
+<h2 id="finish">Can they actually finish it?</h2>
+<h3>The student</h3>
+<ul>
+  <li><strong>Must already be able to:</strong> write Python functions and loops, read JSON, install packages with pip, and follow library docs. If not, this costs about 3–4 weeks extra.</li>
+  <li><strong>Will learn:</strong>
+    <ul>
+      <li>HTTP/REST and calling a device's local API (~1 week).</li>
+      <li>SQLite and a scheduled polling loop (~1 week).</li>
+      <li>A small web API with FastAPI or Flask (~1 week).</li>
+      <li>React Native with Expo: screens, state, fetch, a chart library (~3–4 weeks; the largest learning cost).</li>
+      <li>Watts vs. watt-hours, power factor, why a 0.5 W reading is noisy, and how to compute cost from a utility rate (~2 sessions).</li>
+    </ul>
+  </li>
+</ul>
+<h3>The instructor</h3>
+<ul>
+  <li>Must be able to help debug a Python service and a JavaScript/React Native app, and set up home networking (fixed IPs for the plugs, same Wi-Fi for the phone).</li>
+  <li>Must review the experiment design: baseline period, intervention period, controlling for "we just watched less TV this week".</li>
+  <li><strong>Needs someone who has done it before:</strong> only the optional DC sensor track, which is basic I²C wiring and soldering headers. Nothing in the core plan needs electrical expertise, by design.</li>
+</ul>
+<h3>The hours</h3>
+<div class="tbl"><table>
+<thead><tr><th>Block</th><th class="r">Student hours</th></tr></thead>
+<tbody>
+<tr><td>Set up plugs, read and switch them from a Python script</td><td class="r">6</td></tr>
+<tr><td>Measure plug accuracy against the Kill A Watt (incl. low-watt standby loads)</td><td class="r">5</td></tr>
+<tr><td><strong>Hard part:</strong> always-on hub — polling, storage, gap handling, alert rules, REST API — running unattended for weeks</td><td class="r">22</td></tr>
+<tr><td>Learn Expo/React Native</td><td class="r">14</td></tr>
+<tr><td>App screens: live, history chart, toggles, alerts</td><td class="r">18</td></tr>
+<tr><td>Home study: 2 weeks baseline + 2 weeks auto-off (mostly unattended; check-ins and analysis)</td><td class="r">10</td></tr>
+<tr><td>Poster, write-up, demo rehearsal</td><td class="r">12</td></tr>
+<tr class="total"><td>Total</td><td class="r">≈ 87 h</td></tr>
+</tbody></table></div>
+<p>That is about 17–18 weeks at 5 h/week. The 4 weeks of home logging overlap with app work, so calendar time fits within 16–20 weeks. With fewer than about 12 weeks available, cut the alerts and the intervention phase (see <a href="#fallback">fallback</a>).</p>
+
+<h2 id="buy">What to buy</h2>
+<div class="tbl"><table>
+<thead><tr><th>Part</th><th>Why</th><th class="r">Qty</th><th class="r">Unit price</th><th>Where</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Shelly Plug US Gen4, white, 4-pack</td><td><strong>Load-bearing.</strong> Certified switching plus per-outlet power metering, local HTTP API (<code>Switch.GetStatus</code>, <code>Switch.Set</code>)</td><td class="r">1 pack (4 plugs)</td><td class="r">$79.99</td><td><a href="https://us.shelly.com/products/shelly-plug-us-gen4-list">Shelly USA store</a></td><td>White 4-pack in stock 13 Oct 2026. Single plugs $24.99 (white single out of stock, black in stock). Also at <a href="https://www.walmart.com/ip/Shelly-Smart-Plug-WiFi-Bluetooth-Zigbee-Matter-Outlet-Power-Metering-Works-HomeKit-Google-Home-Alexa-Home-Assistant-Smart-Socket-Easy-Setup-Remote-Co/19108015580">Walmart</a> $24.99. Needs 2.4 GHz Wi-Fi.</td></tr>
+<tr><td>P3 Kill A Watt P4400</td><td><strong>Load-bearing for credibility.</strong> Independent reference meter to check the plugs' readings; maker states 0.2% accuracy</td><td class="r">1</td><td class="r">$29.91</td><td><a href="https://www.rfparts.com/p4400.html">RF Parts</a></td><td>In stock 13 Oct 2026. Walmart shows about $31.</td></tr>
+<tr class="total"><td colspan="3">Core total</td><td class="r">$109.90</td><td colspan="2">Plus shipping/tax. Shelly ships free over $50.</td></tr>
+<tr><td>Adafruit ESP32 Feather V2 (#5400)</td><td>Optional DC sensor track: microcontroller with Wi-Fi</td><td class="r">1</td><td class="r">$19.95</td><td><a href="https://www.adafruit.com/product/5400">Adafruit</a></td><td>In stock. $20.95 with headers pre-soldered (avoids soldering).</td></tr>
+<tr><td>Adafruit INA219 current sensor (#904)</td><td>Optional: measures DC voltage and current up to 26 V / ±3.2 A over I²C</td><td class="r">2</td><td class="r">$9.95</td><td><a href="https://www.adafruit.com/product/904">Adafruit</a></td><td>In stock. STEMMA QT cables mean no soldering on the sensor side.</td></tr>
+<tr class="total"><td colspan="3">With optional track</td><td class="r">$149.75</td><td colspan="2">DC supply and small DC loads (LED strip, fan) not priced; use what the lab has.</td></tr>
+</tbody></table></div>
+
+<p><strong>Do not buy</strong> the Adafruit Power Relay FeatherWing or any bare relay or metering module for mains use. It is rated for 120 VAC, but wiring it to wall power is exactly the uncertified mains work this plan avoids. Also avoid the Sonoff S31 route. The S31 is an inexpensive metering plug that ESPHome supports, but flashing it means opening the case and connecting to the serial header. Its metering chip ties logic ground to mains neutral, so it must never be connected to a computer while plugged in.</p>
+
+<h3>Cheaper or alternative sets</h3>
+<ul>
+  <li><strong>Minimum:</strong> Shelly 2-pack, $44.99, plus the Kill A Watt, $29.91: <strong>$74.90</strong>. Two outlets are enough to demo. The home study gets thinner.</li>
+  <li><strong>One strip instead of plugs:</strong> TP-Link Tapo P316M, 6 metered outlets, about $40–60. The open-source <code>python-kasa</code> library (v0.11.0.1, released 4 Oct 2026) lists the P316M and HS300 as supported. <em>Whether it returns per-outlet energy readings locally is unknown until tested.</em> Its docs did not confirm it. The test that settles it: run <code>kasa --host &lt;ip&gt; feature</code> against one strip on day 1, and return it if per-outlet power is missing. Shelly is preferred because its local API is documented by the vendor.</li>
+</ul>
+
+<h3>Software costs</h3>
+<ul>
+  <li>Python, FastAPI/Flask, SQLite, Expo and React Native: free.</li>
+  <li>Testing on a phone: free with the Expo Go app (iPhone or Android).</li>
+  <li>Apple Developer Program: $99/year, needed only to publish on the App Store. Not needed for the MVP.</li>
+  <li>Hub computer: a laptop is enough. An always-on spare computer or a Raspberry Pi is optional. Pi prices rose in December 2025 (Pi 5 4 GB went from $60 to $70), so check current stock before buying.</li>
+  <li>No cloud or API fees: everything runs on the home network.</li>
+</ul>
+
+<h2 id="steps">The steps</h2>
+<ol class="steps">
+  <li><strong>Order parts; agree scope.</strong> Order the Shelly 4-pack and the Kill A Watt. Student and instructor sign off this page's out-of-scope list. <span class="dur">Week 1</span></li>
+  <li><strong>Plug setup.</strong> Join all 4 plugs to 2.4 GHz home Wi-Fi and give each a fixed IP in the router. Open <code>http://&lt;ip&gt;/rpc/Switch.GetStatus?id=0</code> in a browser and see <code>apower</code>. Done when all 4 return JSON. <span class="dur">Week 1–2</span></li>
+  <li><strong>First script.</strong> Python reads watts from all 4 plugs and toggles one with <code>Switch.Set?id=0&amp;on=false</code>. Done when one command prints 4 wattages and switches a lamp. <span class="dur">Week 2</span></li>
+  <li><strong>Accuracy check.</strong> Chain plug → Kill A Watt → load, or swap the order, for 6 loads from about 0.5 W (charger, no phone) to about 1000 W (kettle or hair dryer on low). Record both readings and compute the error. Done when the table exists and the student can state the smallest standby load the plug reads reliably. <span class="dur">Week 3</span></li>
+  <li><span class="tag">HARD PART</span> <strong>Build the hub.</strong> A polling loop every 5–10 s writes to SQLite, survives a plug going offline or the laptop sleeping, and computes daily kWh from the plug's cumulative <code>aenergy.total</code> rather than summing samples. Done when it runs 72 h unattended with under 1% missing intervals and its daily kWh matches the plug's own counter. <span class="dur">Weeks 4–7</span></li>
+  <li><strong>Hub API and alert rules.</strong> REST endpoints: <code>/outlets</code>, <code>/outlets/{id}/history</code>, <code>/outlets/{id}/switch</code>, <code>/alerts</code>. Two alert rules: high power, and sustained standby. Done when <code>curl</code> exercises every endpoint and both rules fire on test loads. <span class="dur">Weeks 7–8</span></li>
+  <li><strong>Start baseline logging at home.</strong> Put the 4 plugs on the chosen devices (TV, console, set-top box, monitor, or similar) and change nothing for 14 days. <span class="dur">Weeks 8–10 (runs in background)</span></li>
+  <li><strong>Learn Expo.</strong> Finish the official Expo tutorial and get a "hello" app running on the phone via Expo Go. <span class="dur">Weeks 8–9</span></li>
+  <li><strong>App: live and control screens.</strong> List the 4 outlets with live watts, refreshed every 5 s, and an on/off toggle each. Done when toggling in the app switches the real device. <span class="dur">Weeks 10–11</span></li>
+  <li><strong>App: history and alerts screens.</strong> kWh-per-day bar chart per outlet, standby vs. active split, cost at the family's actual $/kWh, and an alerts list. <span class="dur">Weeks 12–13</span></li>
+  <li><strong>Intervention.</strong> Turn on auto-off rules, for example cutting standby devices off 11 pm–6 am or after N minutes of standby. Log for another 14 days. <span class="dur">Weeks 11–13 (background)</span></li>
+  <li><strong>Analysis.</strong> Compare standby kWh per day, baseline vs. intervention, per device. Report the uncertainty from the accuracy check, and project annual kWh and dollars. Done when there is one results table and one chart. <span class="dur">Week 14</span></li>
+  <li><strong>Write-up and demo.</strong> Poster or report: problem, system diagram, accuracy table, results, limits. Rehearse the two-minute demo, with a fallback recording in case venue Wi-Fi fails. <span class="dur">Weeks 15–16</span></li>
+</ol>
+
+<h2 id="risks">What could go wrong</h2>
+<div class="tbl"><table>
+<thead><tr><th>Risk</th><th>Likelihood</th><th>Cost if it happens</th><th>What to do</th></tr></thead>
+<tbody>
+<tr><td><strong>Safety: scope creep into DIY mains hardware.</strong> Someone decides "real engineering" means building the outlet.</td><td><span class="lk lk-m">Medium</span></td><td>Shock or fire risk. An uncertified device that cannot be used at home or a fair.</td><td>Hard rule in writing: nothing above 26 V is built by hand. The optional own-hardware track is DC only.</td></tr>
+<tr><td><strong>Safety: overloading a plug.</strong> A heater or kettle is plugged in for testing.</td><td><span class="lk lk-l">Low</span></td><td>Plug overheats.</td><td>Stay under the 15 A / 1800 W rating. Do not use space heaters for long tests. Test high loads only briefly and under supervision.</td></tr>
+<tr><td><strong>Standby readings too noisy.</strong> Standby loads are often under 1–2 W, and the plug's low-end accuracy is not published.</td><td><span class="lk lk-m">Medium (unknown until step 4)</span></td><td>The "vampire power" finding becomes unreliable.</td><td>Step 4 settles it. If sub-watt readings are unreliable, choose study devices with standby above the measured floor (TVs, consoles, set-top boxes), and report the floor honestly.</td></tr>
+<tr><td><strong>Hub drops data.</strong> The laptop sleeps, Wi-Fi drops, or the IP changes.</td><td><span class="lk lk-h">High</span></td><td>Gaps in history. The home study is unusable.</td><td>Fixed IPs. Disable laptop sleep or use a spare always-on computer. Compute energy from the plug's cumulative counter, which keeps counting on the plug while the hub is down.</td></tr>
+<tr><td><strong>Experiment confounded.</strong> TV use changes between baseline and intervention.</td><td><span class="lk lk-m">Medium</span></td><td>"Savings" a judge will not believe.</td><td>Measure <em>standby</em> kWh only (hours below threshold), not total. Report hours of active use for both periods.</td></tr>
+<tr><td><strong>Dependence on one vendor.</strong> A Shelly firmware update changes the API, or the white plug stays out of stock.</td><td><span class="lk lk-l">Low</span></td><td>Days of rework, or a delivery delay.</td><td>Turn off auto-update during the study. Black plugs and other retailers were in stock on 13 Oct 2026. Tapo P316M with python-kasa is the backup.</td></tr>
+<tr><td><strong>App toolchain friction.</strong> Expo/React Native is the steepest learning step.</td><td><span class="lk lk-m">Medium</span></td><td>2–3 weeks lost.</td><td>Fallback: a mobile-friendly web page served by the hub, using the same API. It is still "an app" on the phone's home screen.</td></tr>
+<tr><td><strong>Privacy.</strong> Per-device power history shows when the household is home, asleep, or watching TV.</td><td><span class="lk lk-m">Medium</span></td><td>Embarrassment, or exposing a minor's household routine.</td><td>Keep data local. No cloud. Publish only aggregated daily kWh. Get the family's agreement before logging shared devices.</td></tr>
+<tr><td><strong>Human subjects.</strong> Only applies if other households are recruited.</td><td><span class="lk lk-l">Low in this plan</span></td><td>An ISEF-affiliated fair can disqualify data collected without prior approval.</td><td>The core plan uses only the student's own home. If classmates' homes are added, get school/fair Institutional Review Board (IRB) approval and written consent <em>before</em> any data is collected.</td></tr>
+<tr><td><strong>Demo venue Wi-Fi.</strong> The fair network blocks local devices.</td><td><span class="lk lk-h">High at fairs</span></td><td>Live demo fails.</td><td>Bring a travel router or phone hotspot that the plugs and hub both join. Keep a screen recording as backup.</td></tr>
+</tbody></table></div>
+
+<h2 id="fallback">If it goes wrong, then what</h2>
+<p>Cut in this order:</p>
+<ol>
+  <li>Alerts → keep only the high-power alert.</li>
+  <li>Native app → mobile web page served by the hub.</li>
+  <li>Intervention phase → a baseline-only study: "where my home's standby power goes".</li>
+  <li>4 plugs → 2 plugs.</li>
+</ol>
+<p>If the hub never becomes reliable, the project still stands as an accuracy and characterisation study. It would contain the plug-vs-reference measurements and a few days of logged data per device, presented through a working control app. That is a weaker but honest science-fair entry. The project should not fall back to building custom mains hardware to recover novelty.</p>
+
+<h2 id="where">Where it could go</h2>
+<ul>
+  <li><strong>Local or regional science fair (ISEF-affiliated), Energy or Systems Software category.</strong> Most fairs run January–March. The main target is Regeneron ISEF 2027: 8–14 May 2027, Los Angeles Convention Center, reached only through an affiliated fair.</li>
+  <li><strong>Congressional App Challenge.</strong> The 2026 deadline is 26 October 2026, too soon for this build. Aim for the 2027 cycle, which will probably have a similar October deadline (not yet announced).</li>
+  <li><strong>Paper or patent:</strong> unlikely. The hardware and app are commercially mature. A short write-up becomes worth submitting to a high-school research journal only if the student measures several homes, with IRB approval, and reports standby share with honest error bars. Even then it is a replication of Berkeley Lab-style measurements, not new science. There is nothing patentable here.</li>
+</ul>
+
+<h2 id="sources">Sources</h2>
+<p class="meta">All prices and stock checked 13 October 2026 unless noted.</p>
+<ul class="src">
+  <li>Shelly Plug US Gen4, price and pack options ($24.99 / $44.99 / $79.99): <a href="https://us.shelly.com/products/shelly-plug-us-gen4-list">us.shelly.com/products/shelly-plug-us-gen4-list</a></li>
+  <li>Shelly Plug US Gen4, 15 A / 1800 W, Walmart $24.99: <a href="https://www.walmart.com/ip/Shelly-Smart-Plug-WiFi-Bluetooth-Zigbee-Matter-Outlet-Power-Metering-Works-HomeKit-Google-Home-Alexa-Home-Assistant-Smart-Socket-Easy-Setup-Remote-Co/19108015580">walmart.com</a></li>
+  <li>Shelly Plug US Gen4 API device page (switch:0, power meter, Wi-Fi/BLE/Zigbee/Matter): <a href="https://shelly-api-docs.shelly.cloud/gen2/Devices/Gen4/ShellyPlugUSG4">shelly-api-docs.shelly.cloud/…/ShellyPlugUSG4</a></li>
+  <li>Shelly Switch component API (<code>apower</code>, <code>aenergy.total</code>, <code>Switch.Set</code>): <a href="https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/Switch/">shelly-api-docs.shelly.cloud/…/Switch</a></li>
+  <li>P3 Kill A Watt P4400, $29.91, in stock: <a href="https://www.rfparts.com/p4400.html">rfparts.com/p4400.html</a>; 0.2% accuracy spec: <a href="https://www.farnell.com/datasheets/1909239.pdf">Farnell datasheet</a></li>
+  <li>Adafruit ESP32 Feather V2 #5400, $19.95: <a href="https://www.adafruit.com/product/5400">adafruit.com/product/5400</a></li>
+  <li>Adafruit INA219 #904, $9.95, 26 V / ±3.2 A: <a href="https://www.adafruit.com/product/904">adafruit.com/product/904</a></li>
+  <li>Adafruit Power Relay FeatherWing #3191 (cited as "do not use on mains here"): <a href="https://www.adafruit.com/product/3191">adafruit.com/product/3191</a></li>
+  <li>TP-Link Kasa HS300 listings ($59.54, $64.83): <a href="https://www.fullcompass.com/prod/647101-tp-link-hs300-smart-wi-fi-power-strip">Full Compass</a>, <a href="https://cdwg.com/product/tp-link-kasa-hs300-smart-power-strip-1875-watt/5294477">CDW-G</a></li>
+  <li>Tapo P316M per-outlet energy (datasheet): <a href="https://static.tp-link.com/upload/product-overview/2025/202504/20250408/Tapo%20P316M(US)1.6&amp;1.0%20datasheet.pdf">TP-Link datasheet</a>; $39.99 sale vs $59.99 (Dec 2025): <a href="https://slickdeals.net/f/19025314-tp-link-tapo-p316m-smart-power-strip-with-6-individually-controlled-smart-outlets-3-usb-ports-with-surge-protection-for-39-99">Slickdeals</a></li>
+  <li>python-kasa v0.11.0.1 (4 Oct 2026), supported devices: <a href="https://pypi.org/project/python-kasa/">pypi.org/project/python-kasa</a></li>
+  <li>Emporia Smart Plug features: <a href="https://emporiaenergy.com/emporia-smart-plug/">emporiaenergy.com</a></li>
+  <li>Sonoff S31 + ESPHome (serial flashing required): <a href="https://devices.esphome.io/devices/sonoff-s31">devices.esphome.io</a>; non-isolated CSE7766, logic ground tied to neutral: <a href="https://tinkerman.cat/sonoff-s31-now-serious">tinkerman.cat</a></li>
+  <li>Standby power share (Berkeley Lab, 5–10% best guess; 6–26% in 10 homes): <a href="https://www.boston.com/real-estate/lifestyle/2022/12/13/home-appliances-use-power-even-when-off/">Boston.com (2022, quoting LBNL's Alan Meier)</a>, <a href="https://www.berkeley.edu/news/media/releases/2001/02/09_energ.html">UC Berkeley news, 2001</a>, <a href="https://www2.lbl.gov/Science-Articles/Archive/leaking-watts.html">LBNL "Leaking Watts"</a></li>
+  <li>Apple Developer Program $99/year: <a href="https://developer.apple.com/support/compare-memberships">developer.apple.com</a></li>
+  <li>Expo Go on a physical device without a paid account: <a href="https://expo.dev/blog/expo-go-vs-development-builds">expo.dev blog</a></li>
+  <li>Raspberry Pi price rise, Dec 2025: <a href="https://www.phoronix.com/news/Raspberry-Pi-Price-Hikes-RAM">Phoronix</a></li>
+  <li>Regeneron ISEF 2027, 8–14 May 2027, Los Angeles: <a href="https://www.societyforscience.org/isef/grand-award">Society for Science</a>, <a href="https://youthscience.ca/science-fairs/team-canada/events/regeneron-isef-2027/">Youth Science Canada</a></li>
+  <li>Congressional App Challenge 2026 deadline, 26 Oct 2026: <a href="https://larsen.house.gov/helping-you/2026-congressional-app-challenge.htm">larsen.house.gov</a></li>
+</ul>
+
+</main>
+</body>
+</html>
